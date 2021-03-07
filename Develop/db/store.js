@@ -11,9 +11,6 @@ let uniqueId = [{ id:"0000-0000-0000-0000", title: "note1", text: "note1 text" }
 
 // create our class
 class Store {
-    constructor() {
-        this.id = 0;
-    }
     read() {
         return readFileAsync('db/db.json', 'utf8')
     }
@@ -37,7 +34,7 @@ getNotes() {
 //create a function to addNotes
 addNotes(note) {
     const { title, text } = note;
-    const userNote = { title, text, id: ++this.id }
+    const userNote = { title, text, id: uuidv1 }
     return this.getNotes()
     .then(notes => [...notes, userNote])
     .then(newNotes => this.write(newNotes))
@@ -49,7 +46,7 @@ removeNotes(id) {
     return this.getNotes()
     .then(notes => notes.filter(note => note.id !== parseInt(id)))
     .then(newNotes => this.write(newNotes))
-  }
+ }
 }
 //export new store
 
