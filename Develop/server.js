@@ -1,7 +1,7 @@
 const express = require('express')
 
 // require routes
-const htmlRoutes = require('./routes/htmlRoutes')
+const htmlRoutes = require('./routes/htmlRoutes');
 const apiRoutes = require('./routes/apiRoutes');
 
 // Initialize the application and create my port

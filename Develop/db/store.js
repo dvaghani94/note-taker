@@ -33,7 +33,7 @@ getNotes() {
         }
         return notesList;
     })
-  }
+}
 //create a function to addNotes
 addNotes(note) {
     const { title, text } = note;
@@ -42,7 +42,7 @@ addNotes(note) {
     .then(notes => [...notes, userNote])
     .then(newNotes => this.write(newNotes))
     .then(() => newNote)
-  }
+}
 
 //create a function to removeNotes BY ID (you cannot do this without getting uuiv to work)
 removeNotes(id) {
