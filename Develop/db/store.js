@@ -1,7 +1,6 @@
 const { json, response } = require("express");
 const util = require("util");
 const fs = require("fs");
-const db = require("./db.json");
 
 // this package will be used to generate a unique id.
 const uuidv1 = require('uuid')
@@ -35,18 +34,18 @@ getNotes() {
 //create a function to addNotes
 addNotes(note) {
     const { title, text } = note;
-    const userNote = { title, text, id: uuidv1.v4() }
+    const userNote = { title, text, id: uuidv1.v1() }
     return this.getNotes()
     .then(notes => [...notes, userNote])
     .then(newNotes => this.write(newNotes))
-    .then(() => newNote)
+    .then(() => userNote)
 }
 
 //create a function to removeNotes BY ID (you cannot do this without getting uuiv to work)
 removeNotes(id) {
     return this.getNotes()
     .then(notes => notes.filter(note => note.id !== (id)))
-    .then(newNotes => this.write(newNotes))
+    .then(deletedNotes => this.write(deletedNotes))
  }
 }
 //export new store
