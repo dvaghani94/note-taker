@@ -14,12 +14,16 @@ router.get('/notes', (req, res) => {
 
 // create a post request
     router.post('/notes', (req, res) => {
-      getNotes();
-    });
+        store.addNotes(req.body)
+        .then(notes => res.json(notes))
+        .catch(err => res.status(500).json(err));
+    })
   
 // create a delete request
     router.delete('/notes/:id', (req, res) => {
-        removeNotes();
+        store.removeNotes(res.params.id)
+        .then(() => res.json({ok:true}))
+        .catch(err => res.status(500).json(err));
     })
 
 

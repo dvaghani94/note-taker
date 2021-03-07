@@ -11,33 +11,46 @@ let uniqueId = [{ id:"0000-0000-0000-0000", title: "note1", text: "note1 text" }
 
 // create our class
 class Store {
+    constructor() {
+        this.id = 0;
+    }
     read() {
         return readFileAsync('db/db.json', 'utf8')
     }
     write(note) {
         return writeFileAsync('db/db.json', JSON.stringify(note));
     };
-}
-//create a function to getNotes
-function getNotes(id, title, text) {
-        this.id = id;
-        this.title = title;
-        this.text = text;
-    }
-//create a function to addNotes
-let note = [];
-let newNote = new getNotes(uuidv1.v4(), req.body.title, req.body.text);
-note = readFileAsync;
-note.push(newNote);
 
+//create a function to getNotes
+getNotes() {
+    return this.read().then(notes => {
+        let notesList;
+        try { 
+            notesList = [].concat(JSON.parse(notes));
+        }
+        catch (err) {
+            notesList = [];
+        }
+        return notesList;
+    })
+  }
+//create a function to addNotes
+addNotes(note) {
+    const { title, text } = note;
+    const userNote = { title, text, id: ++this.id }
+    return this.getNotes()
+    .then(notes => [...notes, userNote])
+    .then(newNotes => this.write(newNotes))
+    .then(() => newNote)
+  }
 
 //create a function to removeNotes BY ID (you cannot do this without getting uuiv to work)
-function removeNotes(note) {
-    let deleteNote = getNotes["notes" + req.params.id]; 
-    delete getNotes["notes" + req.params.id];
-      JSON.stringify(getNotes)
+removeNotes(id) {
+    return this.getNotes()
+    .then(notes => notes.filter(note => note.id !== parseInt(id)))
+    .then(newNotes => this.write(newNotes))
+  }
 }
-
 //export new store
 
 module.exports = new Store();
