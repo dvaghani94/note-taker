@@ -8,5 +8,5 @@ router.get('/notes', (req, res) => {
 
 // create a perminant route to respond with the index.html 
 router.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../public/'))
+    res.sendFile(path.join(__dirname, '../public/index.html'))
 })
