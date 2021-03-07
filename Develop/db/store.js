@@ -34,7 +34,7 @@ getNotes() {
 //create a function to addNotes
 addNotes(note) {
     const { title, text } = note;
-    const userNote = { title, text, id: uuidv1 }
+    const userNote = { title, text, id: uuidv1.v4() }
     return this.getNotes()
     .then(notes => [...notes, userNote])
     .then(newNotes => this.write(newNotes))
