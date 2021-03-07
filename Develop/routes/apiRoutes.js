@@ -14,16 +14,13 @@ router.get('/notes', (req, res) => {
 
 // create a post request
     router.post('/notes', (req, res) => {
-      console.log(req.body);
-      addNotetoJSON(req.body)
-      res.json(getJSON());
+      getNotes();
     });
   
 // create a delete request
     router.delete('/notes/:id', (req, res) => {
-      removeNoteFromJSON(req.params.id);
-      res.json(getJSON());
-    });
+        removeNotes();
+    })
 
 
 module.exports = router;
