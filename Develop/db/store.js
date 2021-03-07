@@ -1,13 +1,14 @@
 const { json, response } = require("express");
 const util = require("util");
 const fs = require("fs");
+const db = require("./db.json");
 
 // this package will be used to generate a unique id.
 const uuidv1 = require('uuid')
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
-let uniqueId = [{ id:"0000-0000-0000-0000", title: "note1", text: "note1 text" },];
+// let uniqueId = [{ id:"0000-0000-0000-0000", title: "note1", text: "note1 text" },];
 
 // create our class
 class Store {
@@ -44,7 +45,7 @@ addNotes(note) {
 //create a function to removeNotes BY ID (you cannot do this without getting uuiv to work)
 removeNotes(id) {
     return this.getNotes()
-    .then(notes => notes.filter(note => note.id !== parseInt(id)))
+    .then(notes => notes.filter(note => note.id !== (id)))
     .then(newNotes => this.write(newNotes))
  }
 }
